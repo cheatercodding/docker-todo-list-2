@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  python-todo:
+    build:
+      context: ./python-app
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    container_name: python-todo
+    
+  nextjs-todo:
+    build:
+      context: ./nextjs-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - nextjs-data:/app/data
+    container_name: nextjs-todo
+
+volumes:
+  nextjs-data:
